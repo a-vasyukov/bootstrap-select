@@ -499,6 +499,7 @@
     liveSearchPlaceholder: null,
     liveSearchNormalize: false,
     liveSearchStyle: 'contains',
+    liveSearchFocus: true,
     actionsBox: false,
     iconBase: 'glyphicon',
     tickIcon: 'glyphicon-ok',
@@ -1966,7 +1967,7 @@
       });
 
       function setFocus () {
-        if (that.options.liveSearch) {
+        if (that.options.liveSearch && that.options.liveSearchFocus) {
           that.$searchbox.focus();
         } else {
           that.$menuInner.focus();

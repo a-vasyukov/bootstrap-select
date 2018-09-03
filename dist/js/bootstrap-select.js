@@ -523,6 +523,7 @@
     liveSearchPlaceholder: null,
     liveSearchNormalize: false,
     liveSearchStyle: 'contains',
+    liveSearchFocus: true,
     actionsBox: false,
     iconBase: 'glyphicon',
     tickIcon: 'glyphicon-ok',
@@ -954,12 +955,11 @@
       // Helper functions
       /**
        * @param content
-       * @param [index]
        * @param [classes]
        * @param [optgroup]
        * @returns {HTMLElement}
        */
-      var generateLI = function (content, index, classes, optgroup) {
+      var generateLI = function (content, classes, optgroup) {
         var li = elementTemplates.li.cloneNode(false);
 
         if (content) {
@@ -1147,7 +1147,6 @@
             mainElements.push(
               generateLI(
                 false,
-                null,
                 classNames.DIVIDER,
                 optID + 'div'
               )
@@ -1190,7 +1189,6 @@
               mainElements.push(
                 generateLI(
                   false,
-                  null,
                   classNames.DIVIDER,
                   optID + 'div'
                 )
@@ -1208,7 +1206,7 @@
                   labelIcon: labelIcon
                 });
 
-            mainElements.push(generateLI(labelElement, null, 'dropdown-header' + optGroupClass, optID));
+            mainElements.push(generateLI(labelElement, 'dropdown-header' + optGroupClass, optID));
             mainData.push({
               content: labelEscaped,
               subtext: labelSubtext,
@@ -1231,7 +1229,7 @@
             optionIcon: icon
           });
 
-          mainElements.push(generateLI(generateA(textElement, 'opt ' + optionClass + optGroupClass, inline), index, '', optID));
+          mainElements.push(generateLI(generateA(textElement, 'opt ' + optionClass + optGroupClass, inline), '', optID));
           mainData.push({
             content: optionContent || text,
             subtext: subtext,
@@ -1246,7 +1244,7 @@
 
           availableOptionsCount++;
         } else if (thisData.divider === true) {
-          mainElements.push(generateLI(false, index, classNames.DIVIDER));
+          mainElements.push(generateLI(false, classNames.DIVIDER));
           mainData.push({
             type: 'divider',
             originalIndex: index,
@@ -1272,7 +1270,6 @@
             mainElements.push(
               generateLI(
                 false,
-                null,
                 classNames.DIVIDER,
                 optID + 'div'
               )
@@ -1290,7 +1287,7 @@
             optionIcon: icon
           });
 
-          mainElements.push(generateLI(generateA(textElement, optionClass, inline), index));
+          mainElements.push(generateLI(generateA(textElement, optionClass, inline)));
           mainData.push({
             content: optionContent || text,
             subtext: subtext,
@@ -1994,7 +1991,7 @@
       });
 
       function setFocus () {
-        if (that.options.liveSearch) {
+        if (that.options.liveSearch && that.options.liveSearchFocus) {
           that.$searchbox.focus();
         } else {
           that.$menuInner.focus();
